@@ -71,11 +71,20 @@ def checkoutbook(request):
         book_id = catalog.objects.values_list('id', flat=True).get(book=book)
         book_price = catalog.objects.values_list('price', flat=True).get(book=book)
         value = days * book_price
+        #returned = backlog.objects.values_list('returned', flat=True).get(user_id=nif,book=book)
+        #unique_not_returned = backlog.objects.values_list('returned', flat=True).get(user_id=nif,book=book,returned=False)
 
+        #print('returned:', returned)
+        #print('unique_not_returned:', unique_not_returned)
+
+        #if returned:
         upload = backlog(user_id=nif, book_id=book_id, book=book, price=book_price, date_end='1990-01-01', days=days, value=value)
         upload.save()
         return render(request,'clientmanager.html')
-
+        #else:
+        #    messages.info(request, 'Book already rented!')
+        #    return render(request,'clientmanager.html')
+            
     else:
         books = catalog.objects.only("book")
         try:
@@ -104,7 +113,7 @@ def checkinbook(request):
         book_id = catalog.objects.values_list('id', flat=True).get(book=book)
         #book_price = catalog.objects.values_list('price', flat=True).get(book=book)
 
-        backlog.objects.filter(user_id=nif,book_id=book_id).update(date_end=date_end)
+        backlog.objects.filter(user_id=nif,book_id=book_id,returned=False).update(date_end=date_end, returned=True)
 
         return render(request,'clientmanager.html')
     else:

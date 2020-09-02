@@ -46,7 +46,7 @@ def clientmanager(request):
         print("selector check in book")
         #books_by_nif = catalog.objects.only('book').filter(id=nif)
         #backlogs = backlog.objects.all()
-        backlog_by_nif = backlog.objects.all().filter(user_id=nif)
+        backlog_by_nif = backlog.objects.all().filter(user_id=nif,returned=False)
         if not backlog_by_nif: # empty query
           messages.info(request, 'Costumer has no rented books!')
           return render(request,'clientmanager.html')

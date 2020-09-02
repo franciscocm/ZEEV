@@ -38,6 +38,9 @@
                                 <th>
                                     Valor total
                                 </th>
+                                <th>
+                                    Devolvido
+                                </th>
                             </tr>
                         </thead>
                         <tbody>
@@ -55,10 +58,19 @@
                                     <td>
                                         {{each.value}}
                                     </td>
+                                    <td>
+                                        {% if each.returned %} Sim {% else %} Não {% endif %}
+                                    </td>
                                 </tr>
                             {% endfor %}
                         </tbody>
                     </table>
+                    <h5 class="text-left">
+                        Total Pago: 0 €
+                    </h5>
+                    <h5 class="text-left">
+                        Total por Pagar: 100 €
+                    </h5>
                 </div>
             </div>
             <br>
