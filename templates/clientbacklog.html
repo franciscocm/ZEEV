@@ -56,7 +56,7 @@
                                         {{each.price}}
                                     </td>
                                     <td>
-                                        {{each.value}}
+                                        {{each.value}}€
                                     </td>
                                     <td>
                                         {% if each.returned %} Sim {% else %} Não {% endif %}
@@ -66,10 +66,10 @@
                         </tbody>
                     </table>
                     <h5 class="text-left">
-                        Total Pago: 0 €
+                        Total Pago: {{valuePaid}}€
                     </h5>
                     <h5 class="text-left">
-                        Total por Pagar: 100 €
+                        Total por Pagar: {{valueNotPaid}}€
                     </h5>
                 </div>
             </div>

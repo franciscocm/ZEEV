@@ -2,6 +2,7 @@ from django.shortcuts import render, redirect
 from django.urls import reverse_lazy
 from django.core.exceptions import ObjectDoesNotExist
 from django.contrib import messages
+from django.db.models import F, Avg, Count ,Sum
 from .models import clients, backlog, catalog
 
 from CheckinOut.views import checkinbook, checkoutbook, clientbacklog, clientregister 
@@ -67,12 +68,21 @@ def clientmanager(request):
         books_by_nif = catalog.objects.only('book').filter(id=nif)
         backlogs = backlog.objects.all()
         backlog_by_nif = backlog.objects.all().filter(user_id=nif)
+
+        valuePaid = backlog.objects.all().filter(user_id=nif).exclude(returned=True).aggregate(Sum('value'))['value__sum']
+        print('valuePaid: ', valuePaid)
+
+        valueNotPaid = backlog.objects.all().filter(user_id=nif).exclude(returned=False).aggregate(Sum('value'))['value__sum']
+        print('valueNotPaid: ', valueNotPaid)
+        
         contextI = {
           'client'          : client,
           'context'         : context,
           'backlogs'        : backlogs,
           'backlog_by_nif'  : backlog_by_nif,
-          'books_by_nif'    : books_by_nif
+          'books_by_nif'    : books_by_nif,
+          'valuePaid'       : valuePaid,
+          'valueNotPaid'    : valueNotPaid
           #'books_all'       : books_all,
         }
         return render(request,'clientbacklog.html', contextI)
