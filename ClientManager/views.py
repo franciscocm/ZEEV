@@ -69,10 +69,10 @@ def clientmanager(request):
         backlogs = backlog.objects.all()
         backlog_by_nif = backlog.objects.all().filter(user_id=nif)
 
-        valuePaid = backlog.objects.all().filter(user_id=nif).exclude(returned=True).aggregate(Sum('value'))['value__sum']
+        valuePaid = backlog.objects.all().filter(user_id=nif).exclude(returned=False).aggregate(Sum('value'))['value__sum']
         print('valuePaid: ', valuePaid)
 
-        valueNotPaid = backlog.objects.all().filter(user_id=nif).exclude(returned=False).aggregate(Sum('value'))['value__sum']
+        valueNotPaid = backlog.objects.all().filter(user_id=nif).exclude(returned=True).aggregate(Sum('value'))['value__sum']
         print('valueNotPaid: ', valueNotPaid)
         
         contextI = {

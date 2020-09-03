@@ -66,7 +66,7 @@ def checkoutbook(request):
     if request.method=='POST':
         nif = request.POST['nif']
         book = request.POST['book']
-        days = request.POST['days']
+        days = int(request.POST['days'])
         #date_beg = request.POST['date_beg']
         book_id = catalog.objects.values_list('id', flat=True).get(book=book)
         book_price = catalog.objects.values_list('price', flat=True).get(book=book)
