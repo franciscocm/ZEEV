@@ -66,21 +66,36 @@
                         </tbody>
                     </table>
                     <h5 class="text-left">
-                        Total Pago: {{valuePaid}}€
+                        Total pago: {{valuePaid}}€
                     </h5>
                     <h5 class="text-left">
-                        Total por Pagar: {{valueNotPaid}}€
+                        Total por pagar: {{valueNotPaid}}€
                     </h5>
                 </div>
             </div>
             <br>
-            <form action="/">
-                <div class="btn-group-center" role="group">
-                    <button class="btn btn-secondary" type="submit">
-                        Main Menu
-                    </button>
-                </div>
-            </form>
+            <table>
+                <tbody>
+                    <tr>
+                        <th>
+                            <form action="/"></form>
+                                <div class="btn-group-center" role="group">
+                                    <button class="btn btn-secondary" type="submit">
+                                        Main Menu
+                                    </button>
+                                </div>
+                            </form>
+                        </th>
+                        <th>
+                            <div class="btn-group-center" role="group">
+                                <button onclick="window.print();" class="btn btn-secondary">
+                                    Imprimir
+                                </button>
+                            </div>
+                        </th>
+                    <tr>
+                </tbody>
+            </table>
         </div>
     </body>
 </html>
